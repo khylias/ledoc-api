@@ -67,6 +67,11 @@ export class Patient {
     @ApiProperty()
     lastIncome?: string;
 
+    @IsString()
+    @IsOptional()
+    @ApiProperty()
+    lastSubject?: string;
+
     @IsNumber()
     @IsOptional()
     @ApiProperty()
