@@ -10,10 +10,12 @@ import { DictionariesProvider } from './controllers/dictionaries/dictionaries.pr
 
 import { StatsController } from './controllers/stats/stats.controller';
 import { StatsProvider } from './controllers/stats/stats.provider';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, PatientsController, DictionariesController, StatsController],
+    imports: [AuthenticationModule, UsersModule],
+    controllers: [AppController, PatientsController, DictionariesController, StatsController],
     providers: [AppService, PatientsProvider, DictionariesProvider, StatsProvider],
 })
-export class AppModule {}
+export class AppModule { }
