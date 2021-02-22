@@ -50,49 +50,49 @@ export class Patient {
     @IsString()
     @IsOptional()
     @ApiProperty()
-    gender: string;
+    gender?: string;
 
     @IsString()
     @IsOptional()
     @ApiProperty()
-    height: string;
+    height?: string;
 
     @IsNumber()
     @IsOptional()
     @ApiProperty()
-    weight: number;
+    weight?: number;
 
     @IsString()
     @IsOptional()
     @ApiProperty()
-    lastIncome: string;
+    lastIncome?: string;
 
     @IsNumber()
     @IsOptional()
     @ApiProperty()
-    bloodGroup: number;
+    bloodGroup?: number;
 
     @IsString()
     @IsOptional()
     @ApiProperty()
-    socialNumber: string;
+    socialNumber?: string;
 
     @IsString()
     @IsOptional()
     @ApiProperty()
-    notes: string;
+    notes?: string;
     
     @IsOptional()
     @ApiProperty({
         type: PatientDocument,
         isArray: true,
     })
-    documents: PatientDocument[];
+    documents?: PatientDocument[];
 
     @IsOptional()
     @ApiProperty({
         type: PatientTreatment,
         isArray: true,
     })
-    treatments: PatientTreatment[];
+    treatments?: PatientTreatment[];
 }

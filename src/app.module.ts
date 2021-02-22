@@ -12,10 +12,12 @@ import { StatsController } from './controllers/stats/stats.controller';
 import { StatsProvider } from './controllers/stats/stats.provider';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { UsersModule } from './users/users.module';
+import { MeetsController } from './controllers/meets/meets.controller';
+import { MeetsProvider } from './controllers/meets/meets.provider';
 
 @Module({
     imports: [AuthenticationModule, UsersModule],
-    controllers: [AppController, PatientsController, DictionariesController, StatsController],
-    providers: [AppService, PatientsProvider, DictionariesProvider, StatsProvider],
+    controllers: [AppController, PatientsController, DictionariesController, StatsController, MeetsController],
+    providers: [AppService, PatientsProvider, DictionariesProvider, StatsProvider, MeetsProvider],
 })
 export class AppModule { }
