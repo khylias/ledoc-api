@@ -1,5 +1,6 @@
 import { Controller, Get, HttpCode, HttpException, HttpStatus, Query } from '@nestjs/common';
-import { ApiQuery } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { Stat } from './stat.interface';
 
 @Controller('stats')
 export class StatsController {
@@ -32,6 +33,7 @@ export class StatsController {
     }
     @Get()
     @HttpCode(200)
+    @ApiResponse({ status: 200, type: Stat, description: 'Stats' })
     @ApiQuery({ name: 'period', required: false, enum: ['day', 'week', 'month'] })
     getStats(@Query() query) {
         if ( query.period && !this.stats[query.period]) {
