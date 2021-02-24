@@ -55,6 +55,11 @@ export class Patient {
     @IsString()
     @IsOptional()
     @ApiProperty()
+    allergies?: string;
+
+    @IsString()
+    @IsOptional()
+    @ApiProperty()
     height?: string;
 
     @IsNumber()
