@@ -29,7 +29,7 @@ export class PatientsController {
         return this.patientsProvider.create(patient);
     }
 
-    @Delete()
+    @Delete(':id')
     @HttpCode(200)
     delete(@Param() params): Boolean {
         return this.patientsProvider.delete(params.id);
