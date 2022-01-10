@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 class PatientDocument {
     @IsString()
@@ -22,10 +22,9 @@ class PatientTreatment {
     @ApiProperty()
     drug: number;
 
-    @IsNumber()
     @IsNotEmpty()
-    @ApiProperty()
-    repeat: number;
+    @ApiProperty({type: 'array', items: { type: 'number'}})
+    repeat: number[];
 
     @IsNumber()
     @IsNotEmpty()
@@ -47,10 +46,10 @@ export class Patient {
     @ApiProperty()
     lastName: string;
 
-    @IsString()
+    @IsNumber()
     @IsOptional()
     @ApiProperty()
-    gender?: string;
+    gender?: number;
 
     @IsString()
     @IsOptional()

@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from '@nestjs/common';
+import { ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { Patient } from './patient.interface';
 import { PatientsProvider } from './patients.provider';
 
@@ -11,8 +11,9 @@ export class PatientsController {
     @Get()
     @HttpCode(200)
     @ApiResponse({ status: 200, type: Patient, isArray: true, description: 'Array of patients' })
-    getAll(): Patient[] {
-        return this.patientsProvider.getPatients();
+    @ApiQuery({ name: 'search', description: 'Recherche par prénom/nom' })
+    getAll(@Query() query): Patient[] {
+        return this.patientsProvider.getPatients(query);
     }
 
     @Get(':id')

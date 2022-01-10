@@ -58,6 +58,21 @@ export class DictionariesProvider {
         },
     ];
 
+    gender: Dictionary[] = [
+        {
+            id: 1,
+            label: 'Femme'
+        },
+        {
+            id: 2,
+            label: 'Homme'
+        },
+        {
+            id: 3,
+            label: 'Non renseigné'
+        },
+    ];
+
     periods: Dictionary[] = [
         {
             id: 1,
@@ -124,7 +139,7 @@ export class DictionariesProvider {
         if(!this[type]) {
             throw new HttpException({
                 status: HttpStatus.BAD_REQUEST,
-                error: 'Dictionnaire inconnu. Les valeurs autorisées sont : drugs, repeats, periods, bloodgroups',
+                error: 'Dictionnaire inconnu. Les valeurs autorisées sont : drugs, repeats, periods, bloodgroups, gender',
             }, HttpStatus.BAD_REQUEST);
         }
         return this[type];

@@ -6,19 +6,79 @@ import { DictionariesProvider } from '../dictionaries/dictionaries.provider';
 
 @Injectable()
 export class PatientsProvider {
-    patients: Patient[] = [];
+    patients: Patient[] = [
+        {
+            id: "1",
+            firstName: "Jean",
+            lastName: "Lavalanche",
+            gender: 2,
+            allergies: "Aucune",
+            height: "192",
+            weight: 77,
+            lastIncome: "22/12/2020",
+            lastSubject: "Toux sèche",
+            bloodGroup: 4,
+            socialNumber: "00555236698451",
+            notes: "",
+            documents: [
+                {
+                    name: "Ordonnance_22122020",
+                    extension: "PDF",
+                    uploadAt: "22/12/2020"
+                }
+            ],
+            treatments: []
+        },
+        {
+            id: "2",
+            firstName: "Marine",
+            lastName: "Gravol",
+            gender: 1,
+            allergies: "Aucune",
+            height: "165",
+            weight: 52,
+            lastIncome: "04/01/2022",
+            lastSubject: "Tendinite",
+            bloodGroup: 8,
+            socialNumber: "00369788462125",
+            notes: "Suite efforts physiques importants, la patiente ressens des douleurs dans le bassin.",
+            documents: [
+                {
+                    name: "radios_hopital_universitaire",
+                    extension: "PNG",
+                    uploadAt: "28/12/2021" 
+                },
+                {
+                    name: "Arret_travail_temporaire",
+                    extension: "PDF",
+                    uploadAt: "04/01/2022"
+                },
+            ],
+            treatments: [
+                {
+                    drug: 9,
+                    repeat: [1,2,3],
+                    duration: 6
+                }
+            ]
+        }
+    ];
 
-    constructor(private dictionariesProvider: DictionariesProvider) {}
+    constructor(private dictionariesProvider: DictionariesProvider) { }
 
-    getPatients(): Patient[] {
-        return this.patients;
+    getPatients(query): Patient[] {
+        if (!query.search) {
+            return this.patients;
+        }
+        const search = query.search.toLowerCase();
+        return this.patients.filter(patient => patient.firstName.toLowerCase().includes(search) || patient.lastName.toLowerCase().includes(search));
     }
 
     getPatient(id: string): Patient {
         return this.patients.find(patient => patient.id === id);
     }
 
-    update(id: string, patient): Patient|Boolean {
+    update(id: string, patient): Patient | Boolean {
         const index = this.patients.findIndex(patient => patient.id === id);
         if (index === -1) {
             throw new HttpException({
@@ -41,7 +101,7 @@ export class PatientsProvider {
     }
 
     create(data): Patient {
-        if (!this.dictionariesProvider.bloodgroups.find(group => group.id ===  data.bloodGroup)) {
+        if (!this.dictionariesProvider.bloodgroups.find(group => group.id === data.bloodGroup)) {
             throw new HttpException({
                 status: HttpStatus.BAD_REQUEST,
                 error: 'Bad Request',
