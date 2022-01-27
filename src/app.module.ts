@@ -14,10 +14,12 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { UsersModule } from './users/users.module';
 import { MeetsController } from './controllers/meets/meets.controller';
 import { MeetsProvider } from './controllers/meets/meets.provider';
+import { VisitsController } from './controllers/visits/visits.controller';
+import { VisitsProvider } from './controllers/visits/visits.provider';
 
 @Module({
     imports: [AuthenticationModule, UsersModule],
-    controllers: [AppController, PatientsController, DictionariesController, StatsController, MeetsController],
-    providers: [AppService, PatientsProvider, DictionariesProvider, StatsProvider, MeetsProvider],
+    controllers: [AppController, PatientsController, DictionariesController, StatsController, MeetsController, VisitsController],
+    providers: [AppService, PatientsProvider, DictionariesProvider, StatsProvider, MeetsProvider, VisitsProvider],
 })
 export class AppModule { }
