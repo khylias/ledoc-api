@@ -8,14 +8,18 @@ import { PatientsProvider } from '../patients/patients.provider';
 export class VisitsProvider {
     visits: any[] = [
         {
-            id: '1',
+            id: uuidv4(),
             type: 'individual',
-            patient: '1'
+            patient: '1',
+            date: '2022-03-02',
+            subject: 'Consultation à domicile',
         },
         {
-            id: '2',
+            id: uuidv4(),
+            title: '',
             type: 'tour',
-            patients: ['1', '2']
+            startTime: '09:30',
+            patients: ['2', '3'],
         }
     ];
 

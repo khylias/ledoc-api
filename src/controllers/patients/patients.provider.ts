@@ -61,6 +61,22 @@ export class PatientsProvider {
                     duration: 6
                 }
             ]
+        },
+        {
+            id: "3",
+            firstName: "Alexandre",
+            lastName: "Falor",
+            gender: 2,
+            allergies: "Aucune",
+            height: "188",
+            weight: 82,
+            lastIncome: "31/12/2021",
+            lastSubject: "Luxation",
+            bloodGroup: 3,
+            socialNumber: "09876545677",
+            notes: "",
+            documents: [],
+            treatments: []
         }
     ];
 
@@ -113,7 +129,7 @@ export class PatientsProvider {
         return patient;
     }
 
-    delete(id: string): Boolean {
+    delete(id: string): boolean {
         const index = this.patients.findIndex(client => client.id === id);
         if (index === -1) {
             throw new HttpException({
