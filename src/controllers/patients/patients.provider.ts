@@ -94,7 +94,7 @@ export class PatientsProvider {
         return this.patients.find(patient => patient.id === id);
     }
 
-    update(id: string, patient): Patient | Boolean {
+    update(id: string, patient): Patient | boolean {
         const index = this.patients.findIndex(patient => patient.id === id);
         if (index === -1) {
             throw new HttpException({
@@ -111,7 +111,7 @@ export class PatientsProvider {
             }, HttpStatus.BAD_REQUEST);
         };
 
-        let patientUpdated = { ...this.patients[index], ...patient };
+        const patientUpdated = { ...this.patients[index], ...patient };
         this.patients[index] = patientUpdated;
         return patientUpdated;
     }

@@ -83,4 +83,53 @@ export class VisitsProvider {
         this.visits.splice(index, 1);
         return true;
     }
+
+    updateIndividual(id: string, visit): IndividualVisits | boolean {
+        const index = this.visits.findIndex(visit => visit.id === id);
+        if (index === -1) {
+            throw new HttpException({
+                status: HttpStatus.BAD_REQUEST,
+                error: 'Id visite inconnu',
+            }, HttpStatus.BAD_REQUEST);
+        }
+
+        if (!this.patientProvider.getPatient(visit.patient)) {
+            throw new HttpException({
+                status: HttpStatus.BAD_REQUEST,
+                error: 'Id patient inconnu',
+            }, HttpStatus.BAD_REQUEST);
+        }
+
+        if (!!visit.tour && !this.visits.find(visit => visit.id === visit.tour)) {
+            throw new HttpException({
+                status: HttpStatus.BAD_REQUEST,
+                error: 'Id de tournée inconnu',
+            }, HttpStatus.BAD_REQUEST);
+        }
+
+        const visitUpdated = { ...this.visits[index], ...visit };
+        this.visits[index] = visitUpdated;
+        return visitUpdated;
+    }
+
+    updateTour(id: string, visit): TourVisits | boolean {
+        const index = this.visits.findIndex(visit => visit.id === id);
+        if (index === -1) {
+            throw new HttpException({
+                status: HttpStatus.BAD_REQUEST,
+                error: 'Id visite inconnu',
+            }, HttpStatus.BAD_REQUEST);
+        }
+
+        if (!visit.patients.every(patient => !!this.patientProvider.getPatient(patient))) {
+            throw new HttpException({
+                status: HttpStatus.BAD_REQUEST,
+                error: 'Un ID patient n\'est pas reconnu',
+            }, HttpStatus.BAD_REQUEST);
+        }
+
+        const visitUpdated = { ...this.visits[index], ...visit };
+        this.visits[index] = visitUpdated;
+        return visitUpdated;
+    }
 }

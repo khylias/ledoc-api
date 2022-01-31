@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { IndividualVisits, TourVisits, Visits } from './visits.interface';
 import { VisitsProvider } from './visits.provider';
@@ -40,5 +40,19 @@ export class VisitsController {
     @HttpCode(200)
     delete(@Param() params): boolean {
         return this.visitsProvider.delete(params.id);
+    }
+
+    @Put('/individual/:id')
+    @HttpCode(200)
+    @ApiResponse({ status: 200, type: IndividualVisits, description: 'Update Individual Visit' })
+    updateIOne(@Param() params, @Body() payload: IndividualVisits) {
+        return this.visitsProvider.updateIndividual(params.id, payload);
+    }
+
+    @Put('/tour/:id')
+    @HttpCode(200)
+    @ApiResponse({ status: 200, type: TourVisits, description: 'Update Tour Visit' })
+    updateTOne(@Param() params, @Body() payload: TourVisits) {
+        return this.visitsProvider.updateTour(params.id, payload);
     }
 }
