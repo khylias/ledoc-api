@@ -21,6 +21,11 @@ export class IndividualVisits extends Visits {
     @ApiProperty({ description: 'Format YYYY-MM-DD'})
     date?: Date;
 
+    @IsMilitaryTime()
+    @IsNotEmpty()
+    @ApiProperty({ description: 'Heure de départ format HH:MM' })
+    startTime?: string;
+
     @IsNotEmpty()
     @IsString()
     @ApiProperty()
@@ -45,6 +50,6 @@ export class TourVisits extends Visits {
 
     @IsNotEmpty()
     @IsArray()
-    @ApiProperty({type: [String], description: 'Patients UUID'})
-    patients: string[];
+    @ApiProperty({type: [String], description: 'Individual visits UUID'})
+    individuals: string[];
 }

@@ -12,14 +12,31 @@ export class VisitsProvider {
             type: 'individual',
             patient: '1',
             date: '2022-03-02',
+            startTime: '10:30',
             subject: 'Consultation à domicile',
         },
         {
+            id: '3',
+            type: 'individual',
+            patient: '2',
+            date: '2022-03-02',
+            startTime: '10:30',
+            subject: 'Vaccination',
+        },
+        {
+            id: '2',
+            type: 'individual',
+            patient: '3',
+            date: '2022-03-02',
+            startTime: '11:30',
+            subject: 'Consultation post-opératoire',
+        },
+        {
             id: uuidv4(),
-            title: '',
+            title: 'Route de Rochefort',
             type: 'tour',
             startTime: '09:30',
-            patients: ['2', '3'],
+            individuals: ['2', '3'],
         }
     ];
 
@@ -34,7 +51,9 @@ export class VisitsProvider {
         const visit = {...this.visits.find(visit => visit.id === id)};
         if(visit.type === 'individual') visit.patient = this.patientProvider.getPatient(visit.patient);
         if(visit.type === 'tour') {
-            visit.patients = visit.patients.map(patient => this.patientProvider.getPatient(patient));
+            visit.individuals = visit.individuals.map(individualVisit =>  {
+                return this.getVisit(individualVisit);
+            });
         }
         return visit;
     }
